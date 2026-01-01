@@ -16,10 +16,12 @@ import {
 	chromium,
 } from 'playwright';
 
-const DFAC_REGEX = /https:\/\/downforacross.com\/beta\/game\/(.*)/im; // create this each function so that .test() doesn't mess up lastindex
+// RegEx that matches CrossWithFriends URLs for active games
+// Example: https://www.crosswithfriends.com/beta/game/100418498-gaft
+const WEBSITE_REGEX = /https:\/\/crosswithfriends.com\/beta\/game\/(.*)/im;
 
 export const urlFormatIsValid = async (url: string): Promise<boolean> => {
-	const match = url.match(DFAC_REGEX);
+	const match = url.match(WEBSITE_REGEX);
 	if (!match || !url) {
 		return false;
 	}
@@ -54,14 +56,14 @@ export const fetchPuzzleTitleFromUrl = async (page: Page, url: string): Promise<
 	return puzzleTitle;
 };
 
-export const renameDFACUser = async (page: Page): Promise<void> => {
+export const changeUsername = async (page: Page): Promise<void> => {
 	await page.locator('.chat--username--input').fill('Crossbot');
 	await page.locator('.chat--username--input').press('Enter');
 };
 
 export const commentDicsordLinksInGameChat = async (page: Page, url: string, channelName: string, serverID: string, channelID: string): Promise<void> => {
 	await page.goto(url);
-	await renameDFACUser(page);
+	await changeUsername(page);
 	const discordURLNoProtocol = `discord.com/channels/${serverID}/${channelID}`;
 	const chatMessages = [
 		`Hey everyone, Crossbot here!`,
