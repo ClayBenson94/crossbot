@@ -36,7 +36,7 @@ export default {
 				.addStringOption(option =>
 					option
 						.setName('url')
-						.setDescription('The full URL of the CrossWith Friends game')
+						.setDescription('The full URL of the CrossWithFriends game')
 						.setRequired(true)
 				)
 		)

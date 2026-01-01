@@ -2,7 +2,7 @@ const { REST, Routes } = require('discord.js');
 const clientId = process.env.DISCORD_CLIENT_ID;
 const token = process.env.DISCORD_BOT_TOKEN;
 
-const { SetupClient } = require('../src/client');
+const { SetupClient } = require('../build/client');
 
 // Construct and prepare an instance of the REST module
 const rest = new REST({ version: '10' }).setToken(token);
