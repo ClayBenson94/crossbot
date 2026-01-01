@@ -1,4 +1,4 @@
-import cron from 'node-cron';
+// import cron from 'node-cron';
 
 type Config = {
 	activePuzzlesChannelCategoryId: string
@@ -29,32 +29,34 @@ const getConfig = (): Config => {
 		return die('PUZZ_WATCHERS_ROLE_ID is required');
 	}
 
-	const dailyPuzzleCronUTC = process.env.DAILY_PUZZLE_CRON_UTC;
-	if (!dailyPuzzleCronUTC) {
-		return die('DAILY_PUZZLE_CRON_UTC is required');
-	}
-	if (!cron.validate(dailyPuzzleCronUTC)) {
-		return die('DAILY_PUZZLE_CRON_UTC is not a valid cron expression');
-	}
+	// const dailyPuzzleCronUTC = process.env.DAILY_PUZZLE_CRON_UTC;
+	// if (!dailyPuzzleCronUTC) {
+	// 	return die('DAILY_PUZZLE_CRON_UTC is required');
+	// }
+	// if (!cron.validate(dailyPuzzleCronUTC)) {
+	// 	return die('DAILY_PUZZLE_CRON_UTC is not a valid cron expression');
+	// }
 
-	const dailyPuzzleTermsRaw = process.env.DAILY_PUZZLE_TERMS;
-	if (!dailyPuzzleTermsRaw) {
-		return die('DAILY_PUZZLE_TERMS is required');
-	}
-	let dailyPuzzleTerms: string[];
-	try {
-		dailyPuzzleTerms = JSON.parse(dailyPuzzleTermsRaw);
-	}
-	catch (e) {
-		return die('DAILY_PUZZLE_TERMS must be a JSON array');
-	}
+	// const dailyPuzzleTermsRaw = process.env.DAILY_PUZZLE_TERMS;
+	// if (!dailyPuzzleTermsRaw) {
+	// 	return die('DAILY_PUZZLE_TERMS is required');
+	// }
+	// let dailyPuzzleTerms: string[];
+	// try {
+	// 	dailyPuzzleTerms = JSON.parse(dailyPuzzleTermsRaw);
+	// }
+	// catch (e) {
+	// 	return die('DAILY_PUZZLE_TERMS must be a JSON array');
+	// }
 
 	const finalConfig = {
 		activePuzzlesChannelCategoryId,
 		oldPuzzlesChannelCategoryId,
 		puzzWatchersRoleId,
-		dailyPuzzleCronUTC,
-		dailyPuzzleTerms: dailyPuzzleTerms,
+		// dailyPuzzleTerms: dailyPuzzleTerms,
+		// Deprecated the below two settings temporarily
+		dailyPuzzleCronUTC: '',
+		dailyPuzzleTerms: [],
 	};
 	console.log(`Config loaded successfully:\n${JSON.stringify(finalConfig, null, 2)}`);
 	return finalConfig;
