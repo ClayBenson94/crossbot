@@ -47,8 +47,6 @@ export default function SetupCron(client: ClientWithCommands) {
 			}
 
 			// Get the first puzzle, assuming there's only one important result
-			// const puzzleInfo = puzzlesJson['puzzles'][0]['content']['info'];
-			// https://downforacross.com/beta/play/35406
 			const puzzleTitle = puzzlesJson.puzzles[0].content.info.title;
 			const puzzleId = puzzlesJson.puzzles[0].pid;
 			const channelTitle = slugify(puzzleTitle, {
@@ -58,8 +56,8 @@ export default function SetupCron(client: ClientWithCommands) {
 			});
 			console.log(`\tFound puzzle: ${puzzleTitle} (pid: ${puzzleId}). Navigating to puzzle...`);
 
-			await page.goto(`https://downforacross.com/beta/play/${puzzleId}`);
-			await page.waitForURL('https://downforacross.com/beta/game/*');
+			await page.goto(`https://crosswithfriends.com/beta/play/${puzzleId}`);
+			await page.waitForURL('https://crosswithfriends.com/beta/game/*');
 			const url = await page.url();
 
 			console.log(`\tGot puzzle URL: ${url}`);
@@ -74,7 +72,7 @@ export default function SetupCron(client: ClientWithCommands) {
 	});
 }
 
-// PuzzleListAPIResponse represents the response from the DownForACross API /api/puzzle_list
+// PuzzleListAPIResponse represents the response from the CrossWithFriends API /api/puzzle_list
 // It only captures the fields this application cares about, not the full response
 interface PuzzleListAPIResponse {
 	puzzles: {
